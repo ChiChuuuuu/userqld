@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\MajorController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +20,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard');
 });
-// Route::get('/class', function () {
-//     return view('class.index');
-// });
 
 //CRUD Class
 Route::resource('class',ClassroomController::class);
 
 Route::resource('major',MajorController::class);
+
+Route::resource('subject',SubjectController::class);
+
+Route::resource('student',StudentController::class);

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MajorModel;
-use App\Models\SubjectModel;
+use App\Models\ClassModels;
+use App\Models\StudentModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SubjectController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +16,12 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $listSub = DB::table('subject')
-        ->join('major', 'subject.idMajor', '=', 'major.idMajor')
-        ->select('subject.idSub', 'subject.nameSub', 'major.nameMajor')
+        $listStudent = DB::table('student')
+        ->join('classroom', 'classroom.idClass', '=', 'student.idClass')
+        ->select('student.*', 'classroom.nameClass')
         ->get();
-        return view('subject.index',[
-            "listSub" => $listSub
+        return view('student.index',[
+            'listStudent'=>$listStudent
         ]);
     }
 
@@ -32,9 +32,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        $listMajor = MajorModel::all();
-        return view('subject.create',[
-            "listMajor"=>$listMajor,
+        $listClass = ClassModels::all();
+        return view('student.create', [
+            'listClass' => $listClass
         ]);
     }
 
@@ -46,13 +46,21 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        $nameSubject = $request->get('nameSubject');
-        $idMajor = $request->get('idMajor');
-        $subject = new SubjectModel();
-        $subject->nameSub = $nameSubject;
-        $subject->idMajor = $idMajor;
-        $subject->save();
-        return redirect(route('subject.index'));
+        $name = $request->get('name');
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $gender = $request->get('gender');
+        $dob = $request->get('date');
+        $class = $request->get('idClass');
+        $student = new StudentModel();
+        $student->name = $name;
+        $student->email = $email;
+        $student->password = $password;
+        $student->gender = $gender;
+        $student->dob = $dob;
+        $student->idClass = $class;
+        $student->save();
+        return redirect(route('student.index'));
     }
 
     /**

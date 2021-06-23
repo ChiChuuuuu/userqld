@@ -14,12 +14,12 @@
 				<nav class="pull-left">
 					<ul>
 						<li>
-							<a href="http://www.creative-tim.com">
-								Creative Tim
+							<a href="http://www.eyeem.com/u/31162254">
+								Eeyem
 							</a>
 						</li>
 						<li>
-							<a href="http://blog.creative-tim.com">
+							<a href="http://www.eyeem.com/u/31162254">
 							   Blog
 							</a>
 						</li>
@@ -31,7 +31,7 @@
 					</ul>
 				</nav>
 				<div class="copyright pull-right">
-					&copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Trần Anh Huy</a>
+					&copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.eyeem.com/u/31162254">Trần Anh Huy</a>
 				</div>
 			</div>
 		</footer>

@@ -96,23 +96,23 @@
                 </li>
                 <li>
                     <a href="{{ route('class.index') }}">
-                        <i class="ti-clipboard"></i>
+                        <i class="ti-view-list-alt"></i>
                         <p>
                             Lớp
                         </p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <i class="ti-clipboard"></i>
+                    <a href="{{ route('student.index')}}">
+                        <i class="ti-id-badge"></i>
                         <p>
                             Sinh Viên
                         </p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <i class="ti-clipboard"></i>
+                    <a href="{{ route('subject.index') }}">
+                        <i class="ti-list"></i>
                         <p>
                             Môn học
                         </p>
@@ -120,7 +120,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <i class="ti-clipboard"></i>
+                        <i class="ti-face-sad"></i>
                         <p>
                             Thêm điểm
                         </p>

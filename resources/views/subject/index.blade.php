@@ -5,25 +5,25 @@
         <div class="content">
             <div class="container-fluid">
                 <h1>
-                    Lớp
+                    Môn học
                 </h1>
 
-                <a href="{{ route('class.create') }}"><button class="btn btn-default">Thêm lớp</button></a>
+                <a href="{{ route('subject.create') }}"><button class="btn btn-default">Thêm môn</button></a>
 
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Tên Lớp</th>
+                            <th>Môn học</th>
                             <th>Chuyên ngành</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($listClass as $class)
+                        @foreach ($listSub as $sub)
                             <tr>
-                                <td><?= $class->idClass ?></td>
-                                    <td><?= $class->nameClass ?></td>
-                                    <td><?= $class->nameMajor ?></td>
+                                <td><?= $sub->idSub ?></td>
+                                    <td><?= $sub->nameSub ?></td>
+                                    <td><?= $sub->nameMajor ?></td>
                                     <td>Xem</td>
                                     <td>Sửa</td>
                                     <td>Ẩn</td>
