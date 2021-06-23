@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MajorModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MajorController extends Controller
 {
@@ -14,7 +15,10 @@ class MajorController extends Controller
      */
     public function index()
     {
-        //
+        $listMajor = MajorModel::all();
+        return view('major.index',[
+            'listMajor' => $listMajor
+        ]);
     }
 
     /**
@@ -24,7 +28,7 @@ class MajorController extends Controller
      */
     public function create()
     {
-        //
+        return view('major.create');
     }
 
     /**
@@ -35,9 +39,11 @@ class MajorController extends Controller
      */
     public function store(Request $request)
     {
+        $name = $request->get('name');
         $major = new MajorModel();
-        $major->nameMajor = $request->get('major');
+        $major->nameMajor = $name;
         $major->save();
+        return redirect(route('major.index'));
     }
 
     /**

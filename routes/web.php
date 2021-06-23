@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\MajorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Them URL
 Route::get('/', function () {
     return view('dashboard');
 });
+// Route::get('/class', function () {
+//     return view('class.index');
+// });
 
+//CRUD Class
 Route::resource('class',ClassroomController::class);
+
+Route::resource('major',MajorController::class);
