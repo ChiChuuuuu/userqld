@@ -24,7 +24,6 @@
                                 <td><?= $sub->idSub ?></td>
                                     <td><?= $sub->nameSub ?></td>
                                     <td><?= $sub->nameMajor ?></td>
-                                    <td>Xem</td>
                                     <td>Sửa</td>
                                     <td>Ẩn</td>
                                 </tr>

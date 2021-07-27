@@ -5,7 +5,6 @@
         table,
         th,
         td {
-            border: 1px solid black;
             padding: 5px;
         }
 
@@ -24,7 +23,7 @@
                                 Họ và tên
                             </td>
                             <td>
-                                <input type="text" name="name" />
+                                <input type="text" name="name" required/>
                             </td>
                         </tr>
                         <tr>
@@ -77,7 +76,7 @@
                     </table>
 
 
-                    <br><br>
+                    <br>
                     <button class="btn btn-default">Thêm</button>
                 </form>
             </div>

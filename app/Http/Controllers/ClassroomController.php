@@ -63,7 +63,19 @@ class ClassroomController extends Controller
      */
     public function show($id)
     {
-        //
+        $listClass = DB::table('classroom')
+            ->join('major', 'classroom.idMajor', '=', 'major.idMajor')
+            ->select('classroom.*', 'major.nameMajor')
+            ->where('idClass','=',$id)
+            ->get();
+        $listStudent = DB::table('student')
+            ->select('student.*')
+            ->where('idClass','=',$id)
+            ->get();
+        return view('class.view',[
+            "listClass"=>$listClass,
+            "listStudent"=>$listStudent
+        ]);
     }
 
     /**

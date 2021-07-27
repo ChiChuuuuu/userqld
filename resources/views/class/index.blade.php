@@ -24,9 +24,9 @@
                                 <td><?= $class->idClass ?></td>
                                     <td><?= $class->nameClass ?></td>
                                     <td><?= $class->nameMajor ?></td>
-                                    <td>Xem</td>
-                                    <td>Sửa</td>
-                                    <td>Ẩn</td>
+                                    <td> <a href="{{ route('class.show' , $class->idClass) }}"> Xem danh sách sv </a></td>
+                                    <td>Sửa lớp</td>
+                                    <td>Ẩn lớp</td>
                                 </tr>
                             @endforeach
                             
