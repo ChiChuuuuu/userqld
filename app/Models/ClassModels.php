@@ -10,5 +10,6 @@ class ClassModels extends Model
     use HasFactory;
 
     protected $table = 'classroom';
+    protected $primaryKey = 'idClass';
     public $timestamps = false;
 }

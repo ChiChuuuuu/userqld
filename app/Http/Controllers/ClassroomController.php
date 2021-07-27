@@ -17,11 +17,11 @@ class ClassroomController extends Controller
     public function index()
     {
         $listClass = DB::table('classroom')
-        ->join('major', 'classroom.idMajor', '=', 'major.idMajor')
-        ->select('classroom.idClass', 'classroom.nameClass', 'major.nameMajor')
-        ->get();
-        return view('class.index',[
-            "listClass"=>$listClass
+            ->join('major', 'classroom.idMajor', '=', 'major.idMajor')
+            ->select('classroom.idClass', 'classroom.nameClass', 'major.nameMajor')
+            ->get();
+        return view('class.index', [
+            "listClass" => $listClass
         ]);
     }
 
@@ -33,8 +33,8 @@ class ClassroomController extends Controller
     public function create()
     {
         $listMajor = MajorModel::all();
-        return view('class.create',[
-            "listMajor"=>$listMajor,
+        return view('class.create', [
+            "listMajor" => $listMajor,
         ]);
     }
 
@@ -66,15 +66,15 @@ class ClassroomController extends Controller
         $listClass = DB::table('classroom')
             ->join('major', 'classroom.idMajor', '=', 'major.idMajor')
             ->select('classroom.*', 'major.nameMajor')
-            ->where('idClass','=',$id)
+            ->where('idClass', '=', $id)
             ->get();
         $listStudent = DB::table('student')
             ->select('student.*')
-            ->where('idClass','=',$id)
+            ->where('idClass', '=', $id)
             ->get();
-        return view('class.view',[
-            "listClass"=>$listClass,
-            "listStudent"=>$listStudent
+        return view('class.view', [
+            "listClass" => $listClass,
+            "listStudent" => $listStudent
         ]);
     }
 
@@ -86,7 +86,12 @@ class ClassroomController extends Controller
      */
     public function edit($id)
     {
-        //
+        $class = ClassModels::find($id);
+        $listMajor = MajorModel::all();
+        return view('class.edit',[
+            'class' => $class,
+            'listMajor' => $listMajor
+        ]);
     }
 
     /**
@@ -98,7 +103,13 @@ class ClassroomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $nameClass = $request->get('nameClass');
+        $idMajor = $request->get('idMajor');
+        ClassModels::where('idClass', $id)->update([
+            'nameClass' => $nameClass,
+            'idMajor' => $idMajor
+        ]);
+        return redirect(route('class.index'));
     }
 
     /**

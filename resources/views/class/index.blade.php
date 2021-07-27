@@ -25,7 +25,7 @@
                                     <td><?= $class->nameClass ?></td>
                                     <td><?= $class->nameMajor ?></td>
                                     <td> <a href="{{ route('class.show' , $class->idClass) }}"> Xem danh sách sv </a></td>
-                                    <td>Sửa lớp</td>
+                                    <td><a href="{{ route('class.edit' , $class->idClass) }}">Sửa lớp</td>
                                     <td>Ẩn lớp</td>
                                 </tr>
                             @endforeach
