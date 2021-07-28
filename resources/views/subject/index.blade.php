@@ -24,7 +24,7 @@
                                 <td><?= $sub->idSub ?></td>
                                     <td><?= $sub->nameSub ?></td>
                                     <td><?= $sub->nameMajor ?></td>
-                                    <td>Sửa</td>
+                                    <td><a href="{{ route('subject.edit', $sub->idSub) }}">Sửa</a></td>
                                     <td>Ẩn</td>
                                 </tr>
                             @endforeach

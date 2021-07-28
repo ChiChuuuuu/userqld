@@ -65,7 +65,10 @@ class MajorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $major = MajorModel::find($id);
+        return view('major.edit', [
+            'major' => $major,
+        ]);
     }
 
     /**
@@ -77,7 +80,11 @@ class MajorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $major = $request->get('name');
+        MajorModel::where('idMajor', $id)->update([
+            'nameMajor' => $major,
+        ]);
+        return redirect(route('major.index'));
     }
 
     /**

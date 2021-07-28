@@ -10,5 +10,6 @@ class MajorModel extends Model
     use HasFactory;
 
     protected $table = 'major';
+    protected $primaryKey = 'idMajor';
     public $timestamps = false;
 }

@@ -71,7 +71,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -82,7 +82,12 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = StudentModel::find($id);
+        $listClass = ClassModels::all();
+        return view('student.edit',[
+            'student' => $student,
+            'listClass' => $listClass,
+        ]);
     }
 
     /**
@@ -94,7 +99,21 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->get('name');
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $gender = $request->get('gender');
+        $date = $request->get('date');
+        $idClass = $request->get('idClass');
+        StudentModel::where('idStudent',$id)->update([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+            'gender' => $gender,
+            'dob' => $date,
+            'idClass' => $idClass,
+        ]);
+        return redirect(route('student.index'));
     }
 
     /**

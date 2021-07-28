@@ -74,7 +74,12 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subject = SubjectModel::find($id);
+        $listMajor = MajorModel::all();
+        return view('subject.edit',[
+            'subject' => $subject,
+            'listMajor' => $listMajor
+        ]);
     }
 
     /**
@@ -86,7 +91,13 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $nameSubject = $request->get('nameSubject');
+        $idMajor = $request->get('idMajor');
+        SubjectModel::where('idSub', $id)->update([
+            'nameSub' => $nameSubject,
+            'idMajor' => $idMajor
+        ]);
+        return redirect(route('subject.index'));
     }
 
     /**

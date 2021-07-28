@@ -46,7 +46,7 @@
                                 <td>
                                     {{ $student->nameClass }}
                                 </td>
-                                <td>Sửa</td>
+                                <td><a href="{{ route('student.edit', $student->idStudent) }}"> Sửa</a></td>
                                 <td>Ẩn</td>
                                 </td>
                             </tr>

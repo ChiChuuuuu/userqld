@@ -22,7 +22,7 @@
             <tr>
                 <td>{{ $major->idMajor }}</td>
                 <td>{{ $major->nameMajor }}</td>
-                <td>Sửa</td>
+                <td><a href="{{ route('major.edit', $major->idMajor) }}">Sửa</a></td>
                 <td>Ẩn</td>
                 </td>
             </tr>
