@@ -8,7 +8,15 @@
                     Sinh viên
                 </h1>
 
-                <a href="{{ route('student.create') }}"><button class="btn btn-default">Thêm sinh viên</button></a>
+                <a href="{{ route('student.create') }}"><button class="btn btn-default">Thêm sinh viên</button></a><br><br>
+
+                <form class="navbar-form navbar-left navbar-search-form" role="search">
+                    <div class="input-group">
+                        <input type="text" value="" class="form-control" placeholder="Search..." name="search">
+
+                    </div>
+                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                </form>
 
                 <table class="table table-striped">
                     <thead>
@@ -53,7 +61,7 @@
                         @endforeach
                     </tbody>
                 </table>
-
+                {{ $listStudent->appends(['search' => $search])->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>

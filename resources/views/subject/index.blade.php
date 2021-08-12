@@ -8,7 +8,15 @@
                     Môn học
                 </h1>
 
-                <a href="{{ route('subject.create') }}"><button class="btn btn-default">Thêm môn</button></a>
+                <a href="{{ route('subject.create') }}"><button class="btn btn-default">Thêm môn</button></a><br><br>
+
+                <form class="navbar-form navbar-left navbar-search-form" role="search">
+                    <div class="input-group">
+                        <input type="text" value="" class="form-control" placeholder="Search..." name="search">
+
+                    </div>
+                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                </form>
 
                 <table class="table table-striped">
                     <thead>
@@ -22,17 +30,17 @@
                         @foreach ($listSub as $sub)
                             <tr>
                                 <td><?= $sub->idSub ?></td>
-                                    <td><?= $sub->nameSub ?></td>
-                                    <td><?= $sub->nameMajor ?></td>
-                                    <td><a href="{{ route('subject.edit', $sub->idSub) }}">Sửa</a></td>
-                                    <td>Ẩn</td>
-                                </tr>
-                            @endforeach
-                            
-                        </tbody>
-                    </table>
+                                <td><?= $sub->nameSub ?></td>
+                                <td><?= $sub->nameMajor ?></td>
+                                <td><a href="{{ route('subject.edit', $sub->idSub) }}">Sửa</a></td>
+                                <td>Ẩn</td>
+                            </tr>
+                        @endforeach
 
-                </div>
+                    </tbody>
+                </table>
+                {{ $listSub->appends(['search' => $search])->links('pagination::bootstrap-4') }}
             </div>
         </div>
+    </div>
 @endsection

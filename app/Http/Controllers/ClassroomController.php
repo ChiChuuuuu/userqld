@@ -14,14 +14,16 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
         $listClass = DB::table('classroom')
             ->join('major', 'classroom.idMajor', '=', 'major.idMajor')
             ->select('classroom.idClass', 'classroom.nameClass', 'major.nameMajor')
-            ->get();
+            ->where('classroom.nameClass','LIKE', "%$search%")->paginate('4');
         return view('class.index', [
-            "listClass" => $listClass
+            "listClass" => $listClass,
+            "search" => $search,
         ]);
     }
 

@@ -14,14 +14,16 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
         $listSub = DB::table('subject')
         ->join('major', 'subject.idMajor', '=', 'major.idMajor')
         ->select('subject.idSub', 'subject.nameSub', 'major.nameMajor')
-        ->get();
+        ->where('nameSub','LIKE', "%$search%")->paginate(4);
         return view('subject.index',[
-            "listSub" => $listSub
+            "listSub" => $listSub,
+            'search' => $search,
         ]);
     }
 

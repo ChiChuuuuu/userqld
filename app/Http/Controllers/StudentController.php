@@ -6,6 +6,7 @@ use App\Models\ClassModels;
 use App\Models\StudentModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Student;
 
 class StudentController extends Controller
 {
@@ -14,14 +15,17 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
         $listStudent = DB::table('student')
         ->join('classroom', 'classroom.idClass', '=', 'student.idClass')
         ->select('student.*', 'classroom.nameClass')
-        ->get();
+        ->where('name','LIKE', "%$search%")->paginate(4);
+        
         return view('student.index',[
-            'listStudent'=>$listStudent
+            'listStudent'=>$listStudent,
+            'search' => $search,
         ]);
     }
 

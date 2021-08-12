@@ -13,11 +13,13 @@ class MajorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listMajor = MajorModel::all();
+        $search = $request->get('search');
+        $listMajor = MajorModel::where('nameMajor','LIKE',"%$search%")->paginate(4);
         return view('major.index',[
-            'listMajor' => $listMajor
+            'listMajor' => $listMajor,
+            'search' => $search,
         ]);
     }
 
