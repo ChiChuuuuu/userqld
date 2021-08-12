@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LoginModel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
@@ -20,7 +21,7 @@ class LoginController extends Controller
             $email = $request->get('email');
             $password = $request->get('password');
             $admin = LoginModel::where('email', $email)->where('password', $password)
-            ->firstOrFail();
+                ->firstOrFail();
             $request->session()->put('id', $admin->id);
             return Redirect::route('dashboard');
         } catch (Exception $e) {
