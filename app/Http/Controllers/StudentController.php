@@ -18,15 +18,19 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $listStudent = DB::table('student')
-        ->join('classroom', 'classroom.idClass', '=', 'student.idClass')
-        ->select('student.*', 'classroom.nameClass')
-        ->where('name','LIKE', "%$search%")->paginate(4);
-        
-        return view('student.index',[
-            'listStudent'=>$listStudent,
+        $idClass = $request->get('id-class');
+        $listStudent =  StudentModel::where('name','LIKE',"%$search%")->where('idClass',"$idClass")->paginate(5);
+        $listClass = ClassModels::all();
+        return view('student.index', [
+            'listStudent' => $listStudent,
             'search' => $search,
+            'listClass' => $listClass,
+            'idClass' => $idClass,
         ]);
+        // DB::table('student')
+        // ->join('classroom', 'classroom.idClass', '=', 'student.idClass')
+        // ->select('student.*', 'classroom.nameClass')
+        // ->where('name','LIKE', "%$search%")
     }
 
     /**
@@ -75,7 +79,6 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        
     }
 
     /**
@@ -88,7 +91,7 @@ class StudentController extends Controller
     {
         $student = StudentModel::find($id);
         $listClass = ClassModels::all();
-        return view('student.edit',[
+        return view('student.edit', [
             'student' => $student,
             'listClass' => $listClass,
         ]);
@@ -109,7 +112,7 @@ class StudentController extends Controller
         $gender = $request->get('gender');
         $date = $request->get('date');
         $idClass = $request->get('idClass');
-        StudentModel::where('idStudent',$id)->update([
+        StudentModel::where('idStudent', $id)->update([
             'name' => $name,
             'email' => $email,
             'password' => $password,

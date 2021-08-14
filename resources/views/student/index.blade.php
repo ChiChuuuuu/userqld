@@ -8,13 +8,23 @@
                     Sinh viên
                 </h1>
 
-                <a href="{{ route('student.create') }}"><button class="btn btn-default">Thêm sinh viên</button></a><br><br>
+                <a href="{{ route('student.create') }}"><button class="btn btn-default">Thêm sinh
+                        viên</button></a><br><br>
 
                 <form class="navbar-form navbar-left navbar-search-form" role="search">
                     <div class="input-group">
                         <input type="text" value="" class="form-control" placeholder="Search..." name="search">
-
                     </div>
+                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                </form>
+
+                <form>
+                    <select name="id-class" class="selectpicker">
+                        <option>------</option>
+                        @foreach ($listClass as $class)
+                            <option value="{{ $class->idClass }}" @if ($class->idClass == $idClass) selected @endif>{{ $class->nameClass }}</option>
+                        @endforeach
+                    </select>
                     <button class="btn btn-default"><i class="fa fa-search"></i></button>
                 </form>
 
@@ -27,7 +37,6 @@
                             <th>Mật khẩu </th>
                             <th>Giới tính </th>
                             <th>Ngày sinh </th>
-                            <th>Lớp </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,9 +60,9 @@
                                 <td>
                                     {{ $student->dob }}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $student->nameClass }}
-                                </td>
+                                </td> --}}
                                 <td><a href="{{ route('student.edit', $student->idStudent) }}"> Sửa</a></td>
                                 <td>Ẩn</td>
                                 </td>
@@ -61,7 +70,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $listStudent->appends(['search' => $search])->links('pagination::bootstrap-4') }}
+                {{ $listStudent->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>
