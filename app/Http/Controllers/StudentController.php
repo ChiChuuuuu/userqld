@@ -19,12 +19,12 @@ class StudentController extends Controller
     {
         $search = $request->get('search');
         $idClass = $request->get('id-class');
-        $listStudent =  StudentModel::where('name','LIKE',"%$search%")->where('idClass',"$idClass")->paginate(5);
+        $listStudent =  StudentModel::where('idClass', $idClass)->Where('name', 'LIKE', "%$search%")->paginate(5);
         $listClass = ClassModels::all();
         return view('student.index', [
             'listStudent' => $listStudent,
-            'search' => $search,
             'listClass' => $listClass,
+            'search' => $search,
             'idClass' => $idClass,
         ]);
         // DB::table('student')
