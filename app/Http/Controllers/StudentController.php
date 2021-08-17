@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClassModels;
+use App\Models\GradeModel;
+use App\Models\MajorModel;
 use App\Models\StudentModel;
+use App\Models\SubjectModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Student;
@@ -79,8 +82,32 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $student = StudentModel::find($id);
+        $class = DB::table('classroom')
+        ->join('student','student.idClass','=','classroom.idClass')
+        ->where('idStudent','=',$id)
+        ->get();
+        $grade = DB::table('grades')
+        ->join('subject','subject.idSub','=','grades.idSub')
+        ->where('idStudent','=',$id)
+        ->get();
+        $grade2 = DB::table('grades')
+        ->join('subject','subject.idSub','=','grades.idSub')
+        ->where('idStudent','=',$id)
+        ->get();
+        // SELECT * FROM `subject` INNER JOIN major on major.idMajor = subject.idMajor inner JOIN classroom on classroom.idMajor = major.idMajor where idClass = 5
+        $idSub = $request->get('idSub');
+        $listSub = SubjectModel::all();
+        return view('student.grade',[
+            'student' => $student,
+            'listSub' => $listSub,
+            'grade' => $grade,
+            'grade2' => $grade2,
+            'idSub' => $idSub,
+            'class' => $class,
+        ]);
     }
 
     /**

@@ -39,6 +39,7 @@
                             <th>Mật khẩu </th>
                             <th>Giới tính </th>
                             <th>Ngày sinh </th>
+                            <th>Điểm </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +63,7 @@
                                 <td>
                                     {{ $student->dob }}
                                 </td>
+                                <td><a href="{{ route('student.show', $student->idStudent) }}"> Xem điểm</a></td>
                                 <td><a href="{{ route('student.edit', $student->idStudent) }}"> Sửa</a></td>
                                 <td>Ẩn</td>
                                 </td>

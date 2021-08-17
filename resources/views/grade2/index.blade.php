@@ -13,7 +13,7 @@
         <div class="content">
             <div class="container-fluid">
                 <h1>
-                    Thêm điểm
+                    Thêm điểm thi lại
                 </h1>
                 <br><br><br>
 
@@ -29,6 +29,7 @@
                                         <option value="{{ $class->idClass }}">{{ $class->nameClass }}</option>
                                     @endforeach
                                 </select>
+
                             </td>
                         </tr>
                         <tr>
@@ -42,15 +43,18 @@
                         <tr>
                             <td>Chọn môn:</td>
                             <td>
-                                <select id="idSub" name="idSubject">
+                                <select name="idSub">
                                     <option>------</option>
+                                    @foreach ($listSub as $subject)
+                                        <option value="{{ $subject->idSub }}">{{ $subject->nameSub }}</option>
+                                    @endforeach
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>Điểm thi:</td>
                             <td>
-                                Skill 1
+                                Skill 2
                             </td>
                         </tr>
                         <tr>
@@ -62,7 +66,7 @@
                         <tr>
                             <td></td>
                             <td>
-                                Final 1
+                                Final 2
                             </td>
                         </tr>
                         <tr>

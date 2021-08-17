@@ -5,7 +5,7 @@
         <div class="content">
             <div class="container-fluid">
                 <h1>
-                    Danh sách lớp
+                    Danh sách sinh viên lớp
                     @foreach ($listClass as $class)
                         {{ $class->nameClass }}
                     @endforeach
