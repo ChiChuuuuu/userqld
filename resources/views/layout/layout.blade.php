@@ -115,7 +115,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('grade.index') }}">
                         <i class="ti-face-sad"></i>
                         <p>
                             Thêm điểm
@@ -198,5 +198,8 @@
 
     });
 </script>
+
+{{-- Customemize Code --}}
+<script src="{{ asset('assets') }}/js/grade.js"></script>
 
 </html>

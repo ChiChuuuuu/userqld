@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\StudentController;
@@ -38,4 +39,9 @@ Route::middleware([CheckLogin::class])->group(function () {
     Route::resource('subject', SubjectController::class);
 
     Route::resource('student', StudentController::class);
+
+    Route::prefix('grade')->name('grade.')->group(function () {
+        Route::get('/', [GradeController::class, 'index'])->name('index');
+        Route::get('/get-students/{id}', [GradeController::class, 'getStudentsByIDClass'])->name('get-students');
+    });
 });
