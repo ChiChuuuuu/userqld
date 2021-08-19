@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClassModels;
+use App\Models\Grade2Model;
 use App\Models\GradeModel;
 use App\Models\StudentModel;
 use App\Models\SubjectModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class GradeController extends Controller
+class Grade2Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +22,7 @@ class GradeController extends Controller
         $listClass = ClassModels::all();
         $listSub = SubjectModel::all();
         $listGrade = GradeModel::all();
-        return view('grade.index', [
+        return view('grade2.index', [
             'listClass' => $listClass,
             'listSub' => $listSub,
             'listGrade' => $listGrade,
@@ -36,12 +37,13 @@ class GradeController extends Controller
         return $listStudent;
     }
 
-    public function getSubjectByIdClass($id){
+    public function getSubjectByIdClass($id)
+    {
         $listSub = DB::table('subject')
-        ->join('major','major.idMajor','=','subject.idMajor')
-        ->join('classroom','classroom.idMajor','=','major.idMajor')
-        ->where('idClass','=',$id)
-        ->get();
+            ->join('major', 'major.idMajor', '=', 'subject.idMajor')
+            ->join('classroom', 'classroom.idMajor', '=', 'major.idMajor')
+            ->where('idClass', '=', $id)
+            ->get();
         return $listSub;
     }
 
@@ -51,12 +53,11 @@ class GradeController extends Controller
         $idSub = $request->get('idSubject');
         $skillGrade = $request->get('skillGrade');
         $finalGrade = $request->get('finalGrade');
-        $grade = new GradeModel();
-        $grade->idStudent = $idStudent;
-        $grade->idSub = $idSub;
-        $grade->Skill1 = $skillGrade;
-        $grade->Final1 = $finalGrade;
-        $grade->save();
-        return redirect(route('grade.index'))->with('success', 'Thêm điểm thành công');
+        Grade2Model::where('idStudent', $idStudent)->where('idSub', $idSub)->update([
+            'Skill2' => $skillGrade,
+            'Final2' => $finalGrade,
+        ]);
+        return redirect(route('grade2.index'))->with('success', 'Thêm điểm thành công');
     }
+
 }

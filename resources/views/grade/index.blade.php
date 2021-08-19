@@ -17,6 +17,14 @@
                 </h1>
                 <br><br><br>
 
+                @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{!! \Session::get('success') !!}</li>
+                        </ul>
+                    </div>
+                @endif
+
                 <form action="{{ route('grade.store') }}" method="post">
                     @csrf
                     <table>

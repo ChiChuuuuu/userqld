@@ -115,10 +115,26 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('viewgrade.index') }}">
+                        <i class="ti-face-sad"></i>
+                        <p>
+                            Điểm
+                        </p>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('grade.index') }}">
                         <i class="ti-face-sad"></i>
                         <p>
                             Thêm điểm
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('grade2.index') }}">
+                        <i class="ti-face-sad"></i>
+                        <p>
+                            Thêm điểm thi lại
                         </p>
                     </a>
                 </li>

@@ -13,11 +13,19 @@
         <div class="content">
             <div class="container-fluid">
                 <h1>
-                    Thêm điểm thi lại
+                    Thêm điểm thi lai
                 </h1>
                 <br><br><br>
 
-                <form action="{{ route('grade.store') }}" method="post">
+                @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{!! \Session::get('success') !!}</li>
+                        </ul>
+                    </div>
+                @endif
+
+                <form action="{{ route('grade2.store') }}" method="post">
                     @csrf
                     <table>
                         <tr>
@@ -29,7 +37,6 @@
                                         <option value="{{ $class->idClass }}">{{ $class->nameClass }}</option>
                                     @endforeach
                                 </select>
-
                             </td>
                         </tr>
                         <tr>
@@ -43,11 +50,8 @@
                         <tr>
                             <td>Chọn môn:</td>
                             <td>
-                                <select name="idSub">
+                                <select id="idSub" name="idSubject">
                                     <option>------</option>
-                                    @foreach ($listSub as $subject)
-                                        <option value="{{ $subject->idSub }}">{{ $subject->nameSub }}</option>
-                                    @endforeach
                                 </select>
                             </td>
                         </tr>

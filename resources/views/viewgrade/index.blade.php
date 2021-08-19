@@ -5,13 +5,8 @@
         <div class="content">
             <div class="container-fluid">
                 <h1>
-                    Sinh viên
+                    Điểm sinh viên
                 </h1>
-
-                <a href="{{ route('student.create') }}"><button class="btn btn-default">Thêm sinh
-                        viên</button></a><br><br>
-
-
 
                 <form>
                     <select name="id-class" class="selectpicker">
@@ -28,41 +23,46 @@
                         <tr>
                             <th>ID</th>
                             <th>Họ và tên</th>
-                            <th>Email </th>
-                            <th>Mật khẩu </th>
-                            <th>Giới tính </th>
                             <th>Ngày sinh </th>
+                            <th>Môn</th>
+                            <th>Điểm Skill </th>
+                            <th>Điểm Final </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($listStudent as $student)
                             <tr>
-                                <td>{{ $student->idStudent }}</td>
-                                <td>{{ $student->name }}</td>
                                 <td>
-                                    {{ $student->email }}
+                                    {{ $student->idStudent }}
                                 </td>
                                 <td>
-                                    {{ $student->password }}
-                                </td>
-                                <td>
-                                    @if ($student->gender == 0)
-                                        Nam
-                                    @else
-                                        Nu
-                                    @endif
+                                    {{ $student->name }}
                                 </td>
                                 <td>
                                     {{ $student->dob }}
                                 </td>
-                                <td><a href="{{ route('student.edit', $student->idStudent) }}"> Sửa</a></td>
-                                <td>Ẩn</td>
+                                <td>
+                                    {{ $student->nameSub }}
+                                </td>
+                                <td>
+                                    @if ($student->Skill2 == null)
+                                        {{ $student->Skill1 }}
+                                    @else
+                                        {{ ($student->Skill1 + $student->Skill2) / 2 }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($student->Final2 == null)
+                                        {{ $student->Final1 }}
+                                    @else
+                                        {{ ($student->Final1 + $student->Final2) / 2 }}
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                {{ $listStudent->appends(['search' => "$search"])->links('pagination::bootstrap-4') }}
+                {{ $listStudent->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>

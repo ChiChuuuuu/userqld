@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ViewGradeController;
 use App\Http\Middleware\CheckLogin;
 use Illuminate\Support\Facades\Route;
 
@@ -43,9 +44,19 @@ Route::middleware([CheckLogin::class])->group(function () {
 
     Route::resource('grade', GradeController::class);
 
+    Route::resource('grade2', Grade2Controller::class);
+
+    Route::resource('viewgrade', ViewGradeController::class);
+
     Route::prefix('grade')->name('grade.')->group(function () {
         Route::get('/', [GradeController::class, 'index'])->name('index');
         Route::get('/get-students/{id}', [GradeController::class, 'getStudentsByIDClass'])->name('get-students');
         Route::get('/get-subject/{id}', [GradeController::class, 'getSubjectByIdClass'])->name('get-subject');
+    });
+
+    Route::prefix('grade2')->name('grade2.')->group(function () {
+        Route::get('/', [Grade2Controller::class, 'index'])->name('index');
+        Route::get('/get-students/{id}', [Grade2Controller::class, 'getStudentsByIDClass'])->name('get-students');
+        Route::get('/get-subject/{id}', [Grade2Controller::class, 'getSubjectByIdClass'])->name('get-subject');
     });
 });
