@@ -9,7 +9,7 @@
                 </h1>
 
                 <form>
-                    <select name="id-class" class="selectpicker">
+                    <select name="id-class" >
                         <option>------</option>
                         @foreach ($listClass as $class)
                             <option value="{{ $class->idClass }}" @if ($class->idClass == $idClass) selected @endif>{{ $class->nameClass }}</option>
@@ -17,6 +17,12 @@
                     </select>
                     <button class="btn btn-default"><i class="fa fa-search"></i></button>
                 </form>
+                {{-- <td>Chọn sinh viên:</td>
+                <td>
+                    <select id="id-student" name="idStudent">
+                        <option>------</option>
+                    </select>
+                </td> --}}
 
                 <table class="table table-striped">
                     <thead>
