@@ -83,10 +83,26 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('major.index') }}">
-                        <i class="ti-clipboard"></i>
+                    <a href="{{ route('viewgrade.index') }}">
+                        <i class="ti-face-sad"></i>
                         <p>
-                            Chuyển Ngành
+                            Điểm
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('grade.index') }}">
+                        <i class="ti-face-sad"></i>
+                        <p>
+                            Thêm điểm
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('grade2.index') }}">
+                        <i class="ti-face-sad"></i>
+                        <p>
+                            Thêm điểm thi lại
                         </p>
                     </a>
                 </li>
@@ -115,26 +131,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('viewgrade.index') }}">
-                        <i class="ti-face-sad"></i>
+                    <a href="{{ route('major.index') }}">
+                        <i class="ti-clipboard"></i>
                         <p>
-                            Điểm
-                        </p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('grade.index') }}">
-                        <i class="ti-face-sad"></i>
-                        <p>
-                            Thêm điểm
-                        </p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('grade2.index') }}">
-                        <i class="ti-face-sad"></i>
-                        <p>
-                            Thêm điểm thi lại
+                            Chuyển Ngành
                         </p>
                     </a>
                 </li>
