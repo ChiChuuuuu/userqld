@@ -1,10 +1,12 @@
 $('#id-class').change(function (e) {
     $('#id-student').html('');
     $('#idSub').html('');
+    $('#student-list').html('');
     var idClass = $(this).val();
     var CurrentURL = window.location.href;
     var URL = CurrentURL + "/get-students/" + idClass;
     var URL2 = CurrentURL + "/get-subject/" + idClass;
+    var URL3 = CurrentURL + "/get-stu/" + idClass;
 
     $.ajax({
         type: "get",

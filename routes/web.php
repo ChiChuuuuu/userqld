@@ -59,4 +59,10 @@ Route::middleware([CheckLogin::class])->group(function () {
         Route::get('/get-students/{id}', [Grade2Controller::class, 'getStudentsByIDClass'])->name('get-students');
         Route::get('/get-subject/{id}', [Grade2Controller::class, 'getSubjectByIdClass'])->name('get-subject');
     });
+
+    Route::prefix('viewgrade')->name('viewgrade.')->group(function () {
+        Route::get('/', [ViewGradeController::class, 'index'])->name('index');
+        Route::get('/get-stu/{id}', [ViewGradeController::class, 'getStuByIDClass'])->name('get-stu');
+        Route::get('/get-subject/{id}', [ViewGradeController::class, 'getSubjectByIdClass'])->name('get-subject');
+    });
 });
