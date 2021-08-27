@@ -9,7 +9,10 @@
                 </h1>
 
                 <a href="{{ route('student.create') }}"><button class="btn btn-default">Thêm sinh
-                        viên</button></a><br><br>
+                        viên</button></a>
+                <a href="{{ route('student.insert-by-excel') }}"><button class="btn btn-default">Thêm sinh
+                        viên = excel</button></a><br><br>
+
 
 
 
@@ -17,7 +20,8 @@
                     <select name="id-class" class="selectpicker">
                         <option>------</option>
                         @foreach ($listClass as $class)
-                            <option value="{{ $class->idClass }}" @if ($class->idClass == $idClass) selected @endif>{{ $class->nameClass }}</option>
+                            <option value="{{ $class->idClass }}" @if ($class->idClass == $idClass) selected @endif>{{ $class->nameClass }}
+                            </option>
                         @endforeach
                     </select>
                     <button class="btn btn-default"><i class="fa fa-search"></i></button>

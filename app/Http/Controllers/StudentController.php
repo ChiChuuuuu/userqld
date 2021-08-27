@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\StudentImport;
 use App\Models\ClassModels;
 use App\Models\GradeModel;
 use App\Models\MajorModel;
@@ -9,6 +10,7 @@ use App\Models\StudentModel;
 use App\Models\SubjectModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Student;
 
 class StudentController extends Controller
@@ -161,5 +163,16 @@ class StudentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function insertByExcel()
+    {
+        return view('student.insert-by-excel');
+    }
+
+    public function insertByExcelProcess(Request $request)
+    {
+        Excel::import(new StudentImport, $request->file('excel'));
+        return view('student.index');
     }
 }

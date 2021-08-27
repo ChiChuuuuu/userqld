@@ -100,7 +100,7 @@ class ViewGradeController extends Controller
      */
     public function edit(Request $request,$id)
     {
-
+        
     }
 
     /**

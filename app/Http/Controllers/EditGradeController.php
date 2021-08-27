@@ -9,6 +9,7 @@ use App\Models\StudentModel;
 use App\Models\SubjectModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\Input;
 
 class EditGradeController extends Controller
 {
