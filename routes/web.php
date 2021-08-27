@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\EditGradeController;
 use App\Http\Controllers\Grade2Controller;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\LoginController;
@@ -48,6 +49,8 @@ Route::middleware([CheckLogin::class])->group(function () {
 
     Route::resource('viewgrade', ViewGradeController::class);
 
+    Route::resource('editgrade', EditGradeController::class);
+
     Route::prefix('grade')->name('grade.')->group(function () {
         Route::get('/', [GradeController::class, 'index'])->name('index');
         Route::get('/get-students/{id}', [GradeController::class, 'getStudentsByIDClass'])->name('get-students');
@@ -64,5 +67,11 @@ Route::middleware([CheckLogin::class])->group(function () {
         Route::get('/', [ViewGradeController::class, 'index'])->name('index');
         Route::get('/get-stu/{id}', [ViewGradeController::class, 'getStuByIDClass'])->name('get-stu');
         Route::get('/get-subject/{id}', [ViewGradeController::class, 'getSubjectByIdClass'])->name('get-subject');
+    });
+
+    Route::prefix('editgrade')->name('editgrade.')->group(function () {
+        Route::get('/', [EditGradeController::class, 'index'])->name('index');
+        Route::get('/get-students/{id}', [EditGradeController::class, 'getStudentsByIDClass'])->name('get-students');
+        Route::get('/get-subject/{id}', [EditGradeController::class, 'getSubjectByIdClass'])->name('get-subject');
     });
 });

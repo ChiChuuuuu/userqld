@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClassModels;
+use App\Models\GradeModel;
 use App\Models\StudentModel;
 use App\Models\SubjectModel;
 use Illuminate\Http\Request;
@@ -97,9 +98,9 @@ class ViewGradeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        //
+
     }
 
     /**

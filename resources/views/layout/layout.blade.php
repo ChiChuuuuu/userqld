@@ -82,11 +82,44 @@
                         </p>
                     </a>
                 </li>
+
                 <li>
-                    <a href="{{ route('viewgrade.index') }}">
+                    <a data-toggle="collapse" href="#formsExamples">
                         <i class="ti-face-sad"></i>
+                        <p>Điểm
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="formsExamples">
+                        <ul class="nav">
+                            {{-- <li>
+                                <a href="{{ route('viewgrade.index') }}">
+                                    <span class="sidebar-normal">Xem điểm</span>
+                                </a>
+                            </li> --}}
+                            <li>
+                                <a href="{{ route('grade.index') }}">
+                                    <span class="sidebar-normal">Thêm điểm</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('grade2.index') }}">
+                                    <span class="sidebar-normal">Thêm điểm thi lại</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('editgrade.index') }}">
+                                    <span class="sidebar-normal">Sửa điểm</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                {{-- <li>
+                    <a href="{{ route('viewgrade.index') }}">
                         <p>
-                            Điểm
+                            Xem điểm
                         </p>
                     </a>
                 </li>
@@ -105,7 +138,8 @@
                             Thêm điểm thi lại
                         </p>
                     </a>
-                </li>
+                </li> --}}
+
                 <li>
                     <a href="{{ route('class.index') }}">
                         <i class="ti-view-list-alt"></i>

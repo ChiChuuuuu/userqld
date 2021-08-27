@@ -42,12 +42,10 @@
                                 <td>{{ $student->Final1 }}</td>
                                 <td>{{ $student->Skill2 }}</td>
                                 <td>{{ $student->Final2 }}</td>
-                                <td><a href="#">Sửa điểm</a></td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                {{-- {{ $listStudent->links('pagination::bootstrap-4') }} --}}
             </div>
         </div>
     </div>

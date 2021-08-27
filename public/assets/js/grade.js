@@ -6,7 +6,6 @@ $('#id-class').change(function (e) {
     var CurrentURL = window.location.href;
     var URL = CurrentURL + "/get-students/" + idClass;
     var URL2 = CurrentURL + "/get-subject/" + idClass;
-    var URL3 = CurrentURL + "/get-stu/" + idClass;
 
     $.ajax({
         type: "get",

@@ -13,7 +13,7 @@
         <div class="content">
             <div class="container-fluid">
                 <h1>
-                    Thêm điểm
+                    Sửa điểm
                 </h1>
                 <br><br><br>
 
@@ -25,13 +25,7 @@
                     </div>
                 @endif
 
-                @if (session()->has('error'))
-                    <div class="alert alert-danger">
-                        {{ session()->get('error') }}
-                    </div>
-                @endif
-
-                <form action="{{ route('grade.store') }}" method="post">
+                <form action="{{ route('editgrade.store') }}" method="post">
                     @csrf
                     <table>
                         <tr>
@@ -64,7 +58,10 @@
                         <tr>
                             <td>Điểm thi:</td>
                             <td>
-                                Skill 1
+                                <select name='Skill'>
+                                    <option value="Skill1">Skill 1</option>
+                                    <option value="Skill2">Skill 2</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -76,7 +73,10 @@
                         <tr>
                             <td></td>
                             <td>
-                                Final 1
+                                <select name='Final'>
+                                    <option value="Final1">Final 1</option>
+                                    <option value="Final2">Final 2</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -87,7 +87,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <button class="btn btn-default">Thêm</button>
+                                <button class="btn btn-default">Update</button>
                             </td>
                         </tr>
                     </table>
