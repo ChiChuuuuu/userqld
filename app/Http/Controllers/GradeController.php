@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\GradeImport;
 use App\Models\ClassModels;
 use App\Models\GradeModel;
 use App\Models\StudentModel;
 use App\Models\SubjectModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GradeController extends Controller
 {
@@ -61,5 +63,14 @@ class GradeController extends Controller
         $grade->Final1 = $finalGrade;
         $grade->save();
         return redirect(route('grade.index'))->with('success', 'Thêm điểm thành công');
+    }
+
+    public function insertByExcel(){
+        return view('grade.insert-by-excel');
+    }
+    
+    public function insertByExcelProcess(Request $request){
+        Excel::import(new GradeImport, $request->file('excel'));
+        return view('grade.insert-by-excel')->with('success', 'Thêm điểm thành công');
     }
 }

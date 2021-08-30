@@ -1,51 +1,68 @@
 @extends('layout.layout');
 
 @section('main')
+
+    <style>
+        table,
+        th,
+        td {
+            padding: 5px;
+        }
+
+    </style>
+
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
-                <h1>
-                    Điểm lớp @foreach ($listClass as $student)
-                        {{ $student->nameClass }}
-                    @endforeach
-                </h1><br>
-
-                <form>
-                    <select name="id-subject" class="selectpicker">
-                        <option>------</option>
-                        @foreach ($listSubject as $subject)
-                            <option value="{{ $subject->idSub }}" @if($subject->idSub == $idClass) selected @endif>{{ $subject->nameSub }}</option>
-                        @endforeach
-                    </select>
-                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
-                </form>
-
-                <table class="table table-striped">
+                <table>
                     <thead>
+
                         <tr>
-                            <th>ID</th>
-                            <th>Họ và tên</th>
-                            <th>Ngày sinh </th>
-                            <th>Điểm Skill </th>
-                            <th>Điểm Final </th>
-                            <th>Điểm Skill thi lại </th>
-                            <th>Điểm Final thi lại </th>
+                            <td>
+                                <h3 hidden>{{ $student->idStudent }}</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Họ và tên</h3>
+                            </td>
+                            <td>
+                                <h3>{{ $student->name }}</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Ngày sinh</h3>
+                            </td>
+                            <td>
+                                <h3>{{ $student->dob }}</h3>
+                            </td>
                         </tr>
                     </thead>
-                    <tbody id="student-list">
-                        @foreach ($listStudent as $student)
+                </table>
+
+                <Table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Môn</th>
+                            <th>Điểm Skill </th>
+                            <th>Điểm Final </th>
+                            <th>Điểm thi lại Skill</th>
+                            <th>Điểm thi lại Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($listGrade as $grade)
                             <tr>
-                                <td>{{ $student->idStudent }}</td>
-                                <td>{{ $student->name }}</td>
-                                <td>{{ $student->dob }}</td>
-                                <td>{{ $student->Skill1 }}</td>
-                                <td>{{ $student->Final1 }}</td>
-                                <td>{{ $student->Skill2 }}</td>
-                                <td>{{ $student->Final2 }}</td>
+                                <td>{{ $grade->nameSub }}</td>
+                                <td>{{ $grade->Skill1 }}</td>
+                                <td>{{ $grade->Final1 }}</td>
+                                <td>{{ $grade->Skill2 }}</td>
+                                <td>{{ $grade->Final2 }}</td>
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </Table>
             </div>
         </div>
     </div>

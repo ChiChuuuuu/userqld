@@ -11,5 +11,6 @@ class GradeModel extends Model
 
     protected $table = 'grades';
     protected $primaryKey = 'idStudent';
+    protected $fillable = ["idStudent","idSub","Skill1","Skill2","Final1","Final2"];
     public $timestamps = false;
 }

@@ -32,10 +32,11 @@
                                 <td><?= $class->idClass ?></td>
                                 <td><?= $class->nameClass ?></td>
                                 <td><?= $class->nameMajor ?></td>
-                                <td> <a href="{{ route('class.show', $class->idClass) }}"> Xem danh sách sv </a></td>
-                                <td> <a href="{{ route('viewgrade.show', $class->idClass) }}"> Xem danh sách điểm </a></td>
-                                <td><a href="{{ route('class.edit', $class->idClass) }}">Sửa lớp</td>
-                                {{-- <td>Ẩn lớp</td> --}}
+                                <td> <a href="{{ route('class.show', $class->idClass) }}" title="Danh sach sv"
+                                        class="btn btn-info btn-simple btn-xs"><i class="fa fa-user"></i></a></td>
+                                <td><a href="{{ route('class.edit', $class->idClass) }}" title="Sửa lớp"
+                                        class="btn btn-success btn-simple btn-xs">
+                                        <i class="fa fa-edit"></i></td>
                             </tr>
                         @endforeach
 

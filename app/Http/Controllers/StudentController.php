@@ -173,6 +173,6 @@ class StudentController extends Controller
     public function insertByExcelProcess(Request $request)
     {
         Excel::import(new StudentImport, $request->file('excel'));
-        return view('student.index');
+        return view('student.insert-by-excel')->with('success', 'Thêm điểm thành công');
     }
 }

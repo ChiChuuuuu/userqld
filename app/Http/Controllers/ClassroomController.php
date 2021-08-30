@@ -63,8 +63,9 @@ class ClassroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $search = $request->get('search');
         $listClass = DB::table('classroom')
             ->join('major', 'classroom.idMajor', '=', 'major.idMajor')
             ->select('classroom.*', 'major.nameMajor')
@@ -73,10 +74,12 @@ class ClassroomController extends Controller
         $listStudent = DB::table('student')
             ->select('student.*')
             ->where('idClass', '=', $id)
-            ->get();
+            ->where('student.name','LIKE',"%$search%")
+            ->paginate(5);
         return view('class.view', [
             "listClass" => $listClass,
-            "listStudent" => $listStudent
+            "listStudent" => $listStudent,
+            'search' => $search,
         ]);
     }
 

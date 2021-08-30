@@ -5,10 +5,10 @@
         <div class="content">
             <div class="container-fluid">
                 <h1>
-                    Thêm sinh viên = excel
+                    Thêm điểm = excel
                 </h1>
 
-                <form action="{{ route('student.insert-by-excel-process') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('grade.insert-by-excel-process') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <input type="file" name="excel"

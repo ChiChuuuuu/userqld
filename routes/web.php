@@ -48,6 +48,11 @@ Route::middleware([CheckLogin::class])->group(function () {
 
     Route::resource('student', StudentController::class,);
 
+    Route::prefix('grade')->name('grade.')->group(function () {
+        Route::get('/insert-by-excel',[GradeController::class,'insertByExcel'])->name('insert-by-excel');
+        Route::post('/insert-by-excel-process',[GradeController::class,'insertByExcelProcess'])->name('insert-by-excel-process');
+    });
+
     Route::resource('grade', GradeController::class);
 
     Route::resource('grade2', Grade2Controller::class);

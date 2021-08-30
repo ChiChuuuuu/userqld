@@ -13,10 +13,7 @@
                 <a href="{{ route('student.insert-by-excel') }}"><button class="btn btn-default">Thêm sinh
                         viên = excel</button></a><br><br>
 
-
-
-
-                <form>
+                {{-- <form>
                     <select name="id-class" class="selectpicker">
                         <option>------</option>
                         @foreach ($listClass as $class)
@@ -59,14 +56,15 @@
                                 <td>
                                     {{ $student->dob }}
                                 </td>
-                                <td><a href="{{ route('student.edit', $student->idStudent) }}"> Sửa</a></td>
-                                {{-- <td>Ẩn</td> --}}
+                                <td><a href="{{ route('student.edit', $student->idStudent) }}" title="Sửa"
+                                    class="btn btn-success btn-simple btn-xs">
+                                    <i class="fa fa-edit"></i></a></td>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                {{ $listStudent->appends(['search' => "$search"])->links('pagination::bootstrap-4') }}
+                {{ $listStudent->links('pagination::bootstrap-4') }} --}}
             </div>
         </div>
     </div>

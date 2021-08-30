@@ -17,13 +17,21 @@
                     @endforeach
                 </h2>
 
+                <form class="navbar-form navbar-left navbar-search-form" role="search">
+                    <div class="input-group">
+                        <input type="text" value="" class="form-control" placeholder="Search..." name="search">
+
+                    </div>
+                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                </form>
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Họ và tên</th>
                             <th>Email</th>
-                            <th>Mật khẩu</th>
+                            <th>Password</th>
                             <th>Giới tính</th>
                             <th>Ngày sinh</th>
                         </tr>
@@ -49,12 +57,13 @@
                                 <td>
                                     {{ $student->dob }}
                                 </td>
+                                <td><a href="{{ route('viewgrade.show', $student->idStudent) }}">Xem diem<a></td>
                             </tr>
                         @endforeach
 
                     </tbody>
                 </table>
-
+                {{ $listStudent->appends(['search' => $search])->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>
