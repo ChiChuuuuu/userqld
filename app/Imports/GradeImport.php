@@ -19,7 +19,8 @@ class GradeImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $data = [
-            "idStudent" => DB::table('grades')->join('student', 'student.idStudent', '=', 'grades.idStudent')->where('grades.idStudent', $row['id_sv'])->where('student.name', '=', $row['ho_ten'])->value("grades.idStudent"),
+            "idStudent" => $row["id_sv"],
+            "name" => $row["ho_ten"],
             "idSub" => SubjectModel::where('nameSub',$row["mon"])->value("idSub"),
             "Skill1" => $row["thuc_hanh"],
             "Final1" => $row["ly_thuyet"],

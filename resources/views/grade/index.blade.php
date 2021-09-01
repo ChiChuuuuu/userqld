@@ -31,7 +31,8 @@
                     </div>
                 @endif
 
-                <a href="{{ route('grade.insert-by-excel') }}"><button class="btn btn-default">Thêm điểm = excel</button></a><br><br>
+                <a href="{{ route('grade.insert-by-excel') }}"><button class="btn btn-default">Thêm điểm = excel</button></a>
+                <a href="{{ url('/grade-sample') }}"><button class="btn btn-default">Tải xuống bản mẫu excel</button></a><br><br>
 
                 <form action="{{ route('grade.store') }}" method="post">
                     @csrf

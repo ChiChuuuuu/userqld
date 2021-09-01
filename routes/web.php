@@ -34,6 +34,28 @@ Route::middleware([CheckLogin::class])->group(function () {
         return view('dashboard');
     })->name('dashboard');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    //Import , export cua excel
+    //Student
+    Route::prefix('student')->name('student.')->group(function () {
+        Route::get('/insert-by-excel', [StudentController::class, 'insertByExcel'])->name('insert-by-excel');
+    });
+    Route::get('/student-sample', [StudentController::class, 'StudentSample']);
+
+    Route::post('/student-preview', [StudentController::class, 'StudentPreview']);
+
+    Route::post('/student-confirm', [StudentController::class, 'confirmSave']);
+
+    //Grade
+    Route::prefix('grade')->name('grade.')->group(function () {
+        Route::get('/insert-by-excel', [GradeController::class, 'insertByExcel'])->name('insert-by-excel');
+    });
+    Route::get('/grade-sample', [GradeController::class, 'GradeSample']);
+
+    Route::post('/grade-preview', [GradeController::class, 'GradePreview']);
+
+    Route::post('/grade-confirm', [GradeController::class, 'confirmSave']);
+
     //CRUD Class
     Route::resource('class', ClassroomController::class);
 
@@ -41,17 +63,10 @@ Route::middleware([CheckLogin::class])->group(function () {
 
     Route::resource('subject', SubjectController::class);
 
-    Route::prefix('student')->name('student.')->group(function () {
-        Route::get('/insert-by-excel',[StudentController::class,'insertByExcel'])->name('insert-by-excel');
-        Route::post('/insert-by-excel-process',[StudentController::class,'insertByExcelProcess'])->name('insert-by-excel-process');
-    });
 
     Route::resource('student', StudentController::class,);
 
-    Route::prefix('grade')->name('grade.')->group(function () {
-        Route::get('/insert-by-excel',[GradeController::class,'insertByExcel'])->name('insert-by-excel');
-        Route::post('/insert-by-excel-process',[GradeController::class,'insertByExcelProcess'])->name('insert-by-excel-process');
-    });
+
 
     Route::resource('grade', GradeController::class);
 

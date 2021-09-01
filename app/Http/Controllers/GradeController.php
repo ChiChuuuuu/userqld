@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\GradeExport;
 use App\Imports\GradeImport;
 use App\Models\ClassModels;
 use App\Models\GradeModel;
 use App\Models\StudentModel;
 use App\Models\SubjectModel;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -38,12 +40,13 @@ class GradeController extends Controller
         return $listStudent;
     }
 
-    public function getSubjectByIdClass($id){
+    public function getSubjectByIdClass($id)
+    {
         $listSub = DB::table('subject')
-        ->join('major','major.idMajor','=','subject.idMajor')
-        ->join('classroom','classroom.idMajor','=','major.idMajor')
-        ->where('idClass','=',$id)
-        ->get();
+            ->join('major', 'major.idMajor', '=', 'subject.idMajor')
+            ->join('classroom', 'classroom.idMajor', '=', 'major.idMajor')
+            ->where('idClass', '=', $id)
+            ->get();
         return $listSub;
     }
 
@@ -54,7 +57,7 @@ class GradeController extends Controller
         $skillGrade = $request->get('skillGrade');
         $finalGrade = $request->get('finalGrade');
         $grade = new GradeModel();
-        if($grade::where('idStudent',$idStudent)->where('idSub',$idSub)->exists()){
+        if ($grade::where('idStudent', $idStudent)->where('idSub', $idSub)->exists()) {
             return redirect(route('grade.index'))->with('error', 'Thêm điểm không thành công sinh viên đã có điểm môn được chọn');
         }
         $grade->idStudent = $idStudent;
@@ -65,12 +68,56 @@ class GradeController extends Controller
         return redirect(route('grade.index'))->with('success', 'Thêm điểm thành công');
     }
 
-    public function insertByExcel(){
+    public function insertByExcel()
+    {
         return view('grade.insert-by-excel');
     }
-    
-    public function insertByExcelProcess(Request $request){
-        Excel::import(new GradeImport, $request->file('excel'));
-        return view('grade.insert-by-excel')->with('success', 'Thêm điểm thành công');
+
+    public function GradeSample()
+    {
+        return Excel::download(new GradeExport(true), now() . " sample.xlsx");
+    }
+
+    public function GradePreview(Request $request)
+    {
+        //Lay du lieu trong file excel -> show thong tin 
+        $grade = Excel::toArray(new GradeImport, $request->file('excel'));
+
+        //Kiem tra file co dung dinh dang hay khong
+        // try {
+        //     $grades = $grade[0][0];
+        //     $idStudent = $grades["id_sv"];
+        //     $name = $grades["ho_ten"];
+        //     $idSub = SubjectModel::where('nameSub',$grades["mon"])->value("idSub");
+        //     $th = $grades["thuc_hanh"];
+        //     $lt = $grades["ly_thuyet"];
+        // } catch (Exception $e) {
+        //     return redirect()->back()->with('message', 'File không đúng định dạng!');
+        // }
+
+        //put vao session
+        session(['tmp_grade' => $grade[0]]);
+
+        return view('grade.preview', [
+            'grade' => $grade[0],
+        ]);
+    }
+
+    public function confirmSave()
+    {
+        $grade = session('tmp_grade');
+        if ($grade != null && count($grade) > 0) {
+            //Nhập vào database
+            foreach ($grade as $grade) {
+                GradeModel::create([
+                    "idStudent" => $grade["id_sv"],
+                    "name" => $grade["ho_ten"],
+                    "idSub" => SubjectModel::where('nameSub', $grade["mon"])->value("idSub"),
+                    "Skill1" => $grade["thuc_hanh"],
+                    "Final1" => $grade["ly_thuyet"],
+                ]);
+            }
+        }
+        return view('grade.insert-by-excel');
     }
 }

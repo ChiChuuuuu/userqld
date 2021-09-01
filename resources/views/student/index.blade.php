@@ -9,9 +9,10 @@
                 </h1>
 
                 <a href="{{ route('student.create') }}"><button class="btn btn-default">Thêm sinh
-                        viên</button></a>
+                        viên</button></a> &nbsp &nbsp &nbsp &nbsp &nbsp
                 <a href="{{ route('student.insert-by-excel') }}"><button class="btn btn-default">Thêm sinh
-                        viên = excel</button></a><br><br>
+                        viên = excel</button></a> &nbsp &nbsp &nbsp &nbsp &nbsp
+                        <a href="{{ url('/student-sample') }}"><button class="btn btn-default">Tải xuống mẫu excel</button></a>
 
                 {{-- <form>
                     <select name="id-class" class="selectpicker">

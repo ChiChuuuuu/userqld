@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StudentExport;
 use App\Imports\StudentImport;
 use App\Models\ClassModels;
 use App\Models\GradeModel;
 use App\Models\MajorModel;
 use App\Models\StudentModel;
 use App\Models\SubjectModel;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -88,21 +90,21 @@ class StudentController extends Controller
     {
         $student = StudentModel::find($id);
         $class = DB::table('classroom')
-        ->join('student','student.idClass','=','classroom.idClass')
-        ->where('idStudent','=',$id)
-        ->get();
+            ->join('student', 'student.idClass', '=', 'classroom.idClass')
+            ->where('idStudent', '=', $id)
+            ->get();
         $grade = DB::table('grades')
-        ->join('subject','subject.idSub','=','grades.idSub')
-        ->where('idStudent','=',$id)
-        ->get();
+            ->join('subject', 'subject.idSub', '=', 'grades.idSub')
+            ->where('idStudent', '=', $id)
+            ->get();
         $grade2 = DB::table('grades')
-        ->join('subject','subject.idSub','=','grades.idSub')
-        ->where('idStudent','=',$id)
-        ->get();
+            ->join('subject', 'subject.idSub', '=', 'grades.idSub')
+            ->where('idStudent', '=', $id)
+            ->get();
         // SELECT * FROM `subject` INNER JOIN major on major.idMajor = subject.idMajor inner JOIN classroom on classroom.idMajor = major.idMajor where idClass = 5
         $idSub = $request->get('idSub');
         $listSub = SubjectModel::all();
-        return view('student.grade',[
+        return view('student.grade', [
             'student' => $student,
             'listSub' => $listSub,
             'grade' => $grade,
@@ -170,9 +172,54 @@ class StudentController extends Controller
         return view('student.insert-by-excel');
     }
 
-    public function insertByExcelProcess(Request $request)
+    public function StudentSample()
     {
-        Excel::import(new StudentImport, $request->file('excel'));
-        return view('student.insert-by-excel')->with('success', 'Thêm điểm thành công');
+        return Excel::download(new StudentExport(true), now() . " sample.xlsx");
+    }
+
+    public function StudentPreview(Request $request)
+    {
+        //Lay du lieu trong file excel -> show thong tin 
+        $student = Excel::toArray(new StudentImport, $request->file('excel'));
+
+        //  return redirect()->back()->with('message', 'File không đúng định dạng!');
+        //Kiem tra file co dung dinh dang hay khong
+        try {
+            $students = $student[0][0];
+            $name = $students['ho_ten'];
+            $email = $students["email"];
+            $password = $students["password"];
+            $gender = $students["gioi_tinh"] == "Nam" ? 0 : 1;
+            $dob = $students["ngay_sinh"];
+            $lop = $students["lop"];
+        } catch (Exception $e) {
+            return redirect()->back()->with('message', 'File không đúng định dạng!');
+        }
+        //put vao session
+        session(['tmp_student' => $student[0]]);
+
+        return view('student.preview', [
+            'student' => $student[0],
+        ]);
+    }
+
+    public function confirmSave()
+    {
+        $student = session('tmp_student');
+        if ($student != null && count($student) > 0) {
+            //Nhập vào database
+            foreach ($student as $student) {
+                $date = str_replace("/", "-", $student["ngay_sinh"]);
+                StudentModel::create([
+                    "name" => $student["ho_ten"],
+                    "email" => $student["email"],
+                    "password" => $student["password"],
+                    "gender" => $student["gioi_tinh"] == "Nam" ? 0 : 1,
+                    "dob" => date("Y-m-d", strtotime($date)),
+                    "idClass" => ClassModels::where("nameClass", $student["lop"])->value("idClass"),
+                ]);
+            }
+        }
+        return view('student.insert-by-excel');
     }
 }

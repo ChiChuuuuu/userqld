@@ -8,7 +8,7 @@
                     Thêm sinh viên = excel
                 </h1>
 
-                <form action="{{ route('student.insert-by-excel-process') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('/student-preview') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <input type="file" name="excel"
@@ -18,13 +18,12 @@
                     <button type="submit" class="btn btn-">Thêm</button>
                 </form>
 
-                @if (\Session::has('success'))
-                    <div class="alert alert-success">
-                        <ul>
-                            <li>{!! \Session::get('success') !!}</li>
-                        </ul>
+                @if (session()->has('message'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('message') }}
                     </div>
                 @endif
+
             </div>
         </div>
     </div>
