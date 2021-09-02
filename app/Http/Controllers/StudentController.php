@@ -193,7 +193,7 @@ class StudentController extends Controller
             $dob = $students["ngay_sinh"];
             $lop = $students["lop"];
         } catch (Exception $e) {
-            return redirect()->back()->with('message', 'File không đúng định dạng!');
+            return redirect()->back()->with('message', 'File không đúng định dạng hoặc không có dữ liệu!');
         }
         //put vao session
         session(['tmp_student' => $student[0]]);

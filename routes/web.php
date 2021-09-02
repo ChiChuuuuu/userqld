@@ -56,6 +56,15 @@ Route::middleware([CheckLogin::class])->group(function () {
 
     Route::post('/grade-confirm', [GradeController::class, 'confirmSave']);
 
+    Route::prefix('grade2')->name('grade2.')->group(function () {
+        Route::get('/insert-by-excel', [Grade2Controller::class, 'insertByExcel'])->name('insert-by-excel');   
+    });
+    Route::get('/grade2-sample', [Grade2Controller::class, 'GradeSample']);
+
+    Route::post('/grade2-preview', [Grade2Controller::class, 'GradePreview']);
+
+    Route::post('/grade2-confirm', [Grade2Controller::class, 'confirmSave']);
+
     //CRUD Class
     Route::resource('class', ClassroomController::class);
 

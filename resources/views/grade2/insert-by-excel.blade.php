@@ -8,7 +8,7 @@
                     Thêm điểm = excel
                 </h1>
 
-                <form action="{{ url('/grade-preview') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('/grade2-preview') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <input type="file" name="excel"

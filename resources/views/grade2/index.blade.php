@@ -17,6 +17,9 @@
                 </h1>
                 <br><br><br>
 
+                <a href="{{ route('grade2.insert-by-excel') }}"><button class="btn btn-default">Thêm điểm = excel</button></a>
+                <a href="{{ url('/grade-sample') }}"><button class="btn btn-default">Tải xuống bản mẫu excel</button></a><br><br>
+
                 @if (\Session::has('success'))
                     <div class="alert alert-success">
                         <ul>

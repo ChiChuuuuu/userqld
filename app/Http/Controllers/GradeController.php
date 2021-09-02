@@ -84,16 +84,16 @@ class GradeController extends Controller
         $grade = Excel::toArray(new GradeImport, $request->file('excel'));
 
         //Kiem tra file co dung dinh dang hay khong
-        // try {
-        //     $grades = $grade[0][0];
-        //     $idStudent = $grades["id_sv"];
-        //     $name = $grades["ho_ten"];
-        //     $idSub = SubjectModel::where('nameSub',$grades["mon"])->value("idSub");
-        //     $th = $grades["thuc_hanh"];
-        //     $lt = $grades["ly_thuyet"];
-        // } catch (Exception $e) {
-        //     return redirect()->back()->with('message', 'File không đúng định dạng!');
-        // }
+        try {
+            $check = $grade[0][0];
+            $idStu = $check["id_sv"];
+            $name = $check["ho_ten"];
+            $idSub = $check["mon"];
+            $TH = $check["thuc_hanh"];
+            $LT = $check["ly_thuyet"];
+        } catch (Exception $e) {
+            return redirect()->back()->with('message', 'File không đúng định dạng hoặc không có dữ liệu!');
+        }
 
         //put vao session
         session(['tmp_grade' => $grade[0]]);
@@ -118,6 +118,6 @@ class GradeController extends Controller
                 ]);
             }
         }
-        return view('grade.insert-by-excel');
+        return redirect(route('grade.insert-by-excel'))->with('success', 'Thêm điểm thành công');
     }
 }
