@@ -222,4 +222,6 @@ class StudentController extends Controller
         }
         return view('student.insert-by-excel');
     }
+
+    
 }

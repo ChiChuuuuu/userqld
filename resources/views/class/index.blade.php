@@ -8,7 +8,9 @@
                     Lớp
                 </h1>
 
-                <a href="{{ route('class.create') }}"><button class="btn btn-default">Thêm lớp</button></a><br><br>
+                <a href="{{ route('class.create') }}"><button class="btn btn-default">Thêm lớp</button></a> &nbsp &nbsp
+                &nbsp &nbsp &nbsp
+                <a href="{{ url('/export') }}"><button class="btn btn-default">Tải xuống danh sách sinh viên</button></a><br><br>
 
                 <form class="navbar-form navbar-left navbar-search-form" role="search">
                     <div class="input-group">

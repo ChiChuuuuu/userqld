@@ -3,26 +3,25 @@
 namespace App\Exports;
 
 use App\Models\StudentModel;
-use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class StudentExport implements FromCollection, WithHeadings, WithMapping
+class Student2Export implements FromCollection, WithHeadings, WithMapping
 {
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function __construct($flag = false)
+    public function __construct($id)
     {
         //Neu flag = true tai xuong sample.xlsx
-        $this->flag = $flag;
+        $this->idClass = $id;
     }
 
     public function collection()
     {
-        if ($this->flag) return new Collection([]);
         return StudentModel::join('classroom', 'classroom.idClass', '=', 'student.idClass')
+            ->where('classroom.idClass', $this->idClass)
             ->select(
                 'idStudent',
                 'name',
@@ -52,7 +51,6 @@ class StudentExport implements FromCollection, WithHeadings, WithMapping
 
     public function headings(): array
     {
-        if ($this->flag) return ['Họ tên', 'Giới tính', 'Ngày sinh', 'Lớp', 'Email', 'Password'];
         return [
             'IDSV', 'Họ tên', 'Email', 'Password', 'Giới tính', 'Ngày sinh', 'Lớp'
         ];

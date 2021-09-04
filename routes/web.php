@@ -46,6 +46,10 @@ Route::middleware([CheckLogin::class])->group(function () {
 
     Route::post('/student-confirm', [StudentController::class, 'confirmSave']);
 
+    Route::get('/export', [ClassroomController::class, 'export']);
+
+    Route::get('/export-by-id-class/{id}', [ClassroomController::class, 'exportByIdClass'])->name('export-by-id-class');
+
     //Grade
     Route::prefix('grade')->name('grade.')->group(function () {
         Route::get('/insert-by-excel', [GradeController::class, 'insertByExcel'])->name('insert-by-excel');
@@ -57,13 +61,15 @@ Route::middleware([CheckLogin::class])->group(function () {
     Route::post('/grade-confirm', [GradeController::class, 'confirmSave']);
 
     Route::prefix('grade2')->name('grade2.')->group(function () {
-        Route::get('/insert-by-excel', [Grade2Controller::class, 'insertByExcel'])->name('insert-by-excel');   
+        Route::get('/insert-by-excel', [Grade2Controller::class, 'insertByExcel'])->name('insert-by-excel');
     });
     Route::get('/grade2-sample', [Grade2Controller::class, 'GradeSample']);
 
     Route::post('/grade2-preview', [Grade2Controller::class, 'GradePreview']);
 
     Route::post('/grade2-confirm', [Grade2Controller::class, 'confirmSave']);
+
+    Route::get('/export-by-id-student/{id}', [Grade2Controller::class, 'exportByIdStudent'])->name('export-by-id-student');
 
     //CRUD Class
     Route::resource('class', ClassroomController::class);
@@ -72,10 +78,7 @@ Route::middleware([CheckLogin::class])->group(function () {
 
     Route::resource('subject', SubjectController::class);
 
-
     Route::resource('student', StudentController::class,);
-
-
 
     Route::resource('grade', GradeController::class);
 

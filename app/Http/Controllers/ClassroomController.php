@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\Student2Export;
+use App\Exports\StudentExport;
 use App\Models\ClassModels;
 use App\Models\MajorModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClassroomController extends Controller
 {
@@ -20,7 +23,7 @@ class ClassroomController extends Controller
         $listClass = DB::table('classroom')
             ->join('major', 'classroom.idMajor', '=', 'major.idMajor')
             ->select('classroom.idClass', 'classroom.nameClass', 'major.nameMajor')
-            ->where('classroom.nameClass','LIKE', "%$search%")->paginate('4');
+            ->where('classroom.nameClass', 'LIKE', "%$search%")->paginate('4');
         return view('class.index', [
             "listClass" => $listClass,
             "search" => $search,
@@ -66,15 +69,14 @@ class ClassroomController extends Controller
     public function show(Request $request, $id)
     {
         $search = $request->get('search');
-        $listClass = DB::table('classroom')
-            ->join('major', 'classroom.idMajor', '=', 'major.idMajor')
+        $listClass = ClassModels::join('major', 'classroom.idMajor', '=', 'major.idMajor')
             ->select('classroom.*', 'major.nameMajor')
             ->where('idClass', '=', $id)
-            ->get();
+            ->first();
         $listStudent = DB::table('student')
             ->select('student.*')
             ->where('idClass', '=', $id)
-            ->where('student.name','LIKE',"%$search%")
+            ->where('student.name', 'LIKE', "%$search%")
             ->paginate(5);
         return view('class.view', [
             "listClass" => $listClass,
@@ -93,7 +95,7 @@ class ClassroomController extends Controller
     {
         $class = ClassModels::find($id);
         $listMajor = MajorModel::all();
-        return view('class.edit',[
+        return view('class.edit', [
             'class' => $class,
             'listMajor' => $listMajor
         ]);
@@ -126,5 +128,14 @@ class ClassroomController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function export()
+    {
+        return Excel::download(new StudentExport, 'Danh sach sv.xlsx');
+    }
+
+    public function exportByIdClass(Request $request,$id){
+        return Excel::download(new Student2Export($id), 'Danh sach sv.xlsx');
     }
 }

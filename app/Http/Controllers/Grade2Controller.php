@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\Grade2Export;
 use App\Imports\Grade2Import;
 use App\Models\ClassModels;
 use App\Models\Grade2Model;
@@ -114,5 +115,9 @@ class Grade2Controller extends Controller
             }
         }
         return redirect(route('grade2.insert-by-excel'))->with('success', 'Thêm điểm thành công');
+    }
+
+    public function exportByIdStudent($id){
+        return Excel::download(new Grade2Export($id), 'Diem sv.xlsx');
     }
 }

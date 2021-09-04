@@ -6,16 +6,21 @@
             <div class="container-fluid">
                 <h1>
                     Danh sách sinh viên lớp
-                    @foreach ($listClass as $class)
+                    {{-- @foreach ($listClass as $class)
                         {{ $class->nameClass }}
-                    @endforeach
+                    @endforeach --}}
+                    {{$listClass->nameClass}}
                 </h1>
                 <h2>
                     Chuyên Ngành:
-                    @foreach ($listClass as $class)
+                    {{-- @foreach ($listClass as $class)
                         {{ $class->nameMajor }}
-                    @endforeach
+                    @endforeach --}}
+                    {{$listClass->nameMajor}}
                 </h2>
+
+                <a href="{{ url('/export-by-id-class',$listClass->idClass) }}"><button class="btn btn-default">Tải xuống danh sách sinh
+                        viên</button></a><br><br>
 
                 <form class="navbar-form navbar-left navbar-search-form" role="search">
                     <div class="input-group">

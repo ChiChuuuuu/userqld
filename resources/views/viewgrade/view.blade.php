@@ -14,6 +14,9 @@
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
+
+
+
                 <table>
                     <thead>
 
@@ -40,6 +43,9 @@
                         </tr>
                     </thead>
                 </table>
+
+                <a href="{{ url('/export-by-id-student', $student->idStudent) }}"><button class="btn btn-default">Tải xuống
+                        điểm của sinh viên</button></a><br><br>
 
                 <Table class="table table-striped">
                     <thead>
