@@ -48,11 +48,11 @@
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="info">
-                    
+
 
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                         <span>
-                            Giáo vụ
+                            <div class='info text-center'>{{ Session::get('name') }}</div>
                             <b class="caret"></b>
                         </span>
                     </a>
@@ -61,7 +61,7 @@
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="#profile">      
+                                <a href="#profile">
                                     <span class="sidebar-normal">Đổi mật khẩu</span>
                                 </a>
                             </li>
@@ -78,45 +78,44 @@
                 <li>
                     <a href="{{ route('dashboard') }}" aria-expanded="true">
                         <i class="ti-panel"></i>
-                        <p>Dashboard
+                        <p>Thông tin cá nhân
                         </p>
                     </a>
                 </li>
 
                 <li>
-                    <a data-toggle="collapse" href="#formsExamples">
+                    <a href="{{ route('grade.show', Session::get('id')) }}">
                         <i class="ti-face-sad"></i>
                         <p>Điểm
-                            <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse" id="formsExamples">
+                    {{-- <div class="collapse" id="formsExamples">
                         <ul class="nav">
                             {{-- <li>
                                 <a href="{{ route('viewgrade.index') }}">
                                     <span class="sidebar-normal">Xem điểm</span>
                                 </a>
                             </li> --}}
-                            <li>
-                                <a href="{{ route('grade.index') }}">
-                                    <span class="sidebar-normal">Thêm điểm</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('grade2.index') }}">
-                                    <span class="sidebar-normal">Thêm điểm thi lại</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('editgrade.index') }}">
-                                    <span class="sidebar-normal">Sửa điểm</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    {{-- <li>
+                    <a href="{{ route('grade.index') }}">
+                        <span class="sidebar-normal">Thêm điểm</span>
+                    </a>
                 </li>
+                <li>
+                    <a href="{{ route('grade2.index') }}">
+                        <span class="sidebar-normal">Thêm điểm thi lại</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('editgrade.index') }}">
+                        <span class="sidebar-normal">Sửa điểm</span>
+                    </a>
+                </li> --}}
+            </ul>
+        </div>
+        </li>
 
-                {{-- <li>
+        {{-- <li>
                     <a href="{{ route('viewgrade.index') }}">
                         <p>
                             Xem điểm
@@ -140,7 +139,7 @@
                     </a>
                 </li> --}}
 
-                <li>
+        {{-- <li>
                     <a href="{{ route('class.index') }}">
                         <i class="ti-view-list-alt"></i>
                         <p>
@@ -149,7 +148,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('student.index')}}">
+                    <a href="{{ route('student.index') }}">
                         <i class="ti-id-badge"></i>
                         <p>
                             Sinh Viên
@@ -171,9 +170,9 @@
                             Chuyển Ngành
                         </p>
                     </a>
-                </li>
-            </ul>
-        </div>
+                </li> --}}
+        </ul>
+    </div>
     </div>
     </div>
     @yield('main')

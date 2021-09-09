@@ -24,22 +24,6 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->get('search');
-        $idClass = $request->get('id-class');
-        $listStudent =  StudentModel::where('idClass', '=', $idClass)
-            ->paginate(5);
-        $listClass = ClassModels::all();
-        return view('student.index', [
-            'listStudent' => $listStudent,
-            'listClass' => $listClass,
-            'search' => $search,
-            'idClass' => $idClass,
-        ]);
-        //where('name', 'LIKE', '%' . "$search" . '%')
-        // DB::table('student')
-        // ->join('classroom', 'classroom.idClass', '=', 'student.idClass')
-        // ->select('student.*', 'classroom.nameClass')
-        // ->where('name','LIKE', "%$search%")
     }
 
     /**
@@ -49,10 +33,6 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $listClass = ClassModels::all();
-        return view('student.create', [
-            'listClass' => $listClass
-        ]);
     }
 
     /**
@@ -63,21 +43,6 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->get('name');
-        $email = $request->get('email');
-        $password = $request->get('password');
-        $gender = $request->get('gender');
-        $dob = $request->get('date');
-        $class = $request->get('idClass');
-        $student = new StudentModel();
-        $student->name = $name;
-        $student->email = $email;
-        $student->password = $password;
-        $student->gender = $gender;
-        $student->dob = $dob;
-        $student->idClass = $class;
-        $student->save();
-        return redirect(route('student.index'));
     }
 
     /**
@@ -88,30 +53,6 @@ class StudentController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $student = StudentModel::find($id);
-        $class = DB::table('classroom')
-            ->join('student', 'student.idClass', '=', 'classroom.idClass')
-            ->where('idStudent', '=', $id)
-            ->get();
-        $grade = DB::table('grades')
-            ->join('subject', 'subject.idSub', '=', 'grades.idSub')
-            ->where('idStudent', '=', $id)
-            ->get();
-        $grade2 = DB::table('grades')
-            ->join('subject', 'subject.idSub', '=', 'grades.idSub')
-            ->where('idStudent', '=', $id)
-            ->get();
-        // SELECT * FROM `subject` INNER JOIN major on major.idMajor = subject.idMajor inner JOIN classroom on classroom.idMajor = major.idMajor where idClass = 5
-        $idSub = $request->get('idSub');
-        $listSub = SubjectModel::all();
-        return view('student.grade', [
-            'student' => $student,
-            'listSub' => $listSub,
-            'grade' => $grade,
-            'grade2' => $grade2,
-            'idSub' => $idSub,
-            'class' => $class,
-        ]);
     }
 
     /**
@@ -123,10 +64,8 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student = StudentModel::find($id);
-        $listClass = ClassModels::all();
         return view('student.edit', [
             'student' => $student,
-            'listClass' => $listClass,
         ]);
     }
 
@@ -140,20 +79,14 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $name = $request->get('name');
-        $email = $request->get('email');
-        $password = $request->get('password');
         $gender = $request->get('gender');
         $date = $request->get('date');
-        $idClass = $request->get('idClass');
         StudentModel::where('idStudent', $id)->update([
             'name' => $name,
-            'email' => $email,
-            'password' => $password,
             'gender' => $gender,
             'dob' => $date,
-            'idClass' => $idClass,
         ]);
-        return redirect(route('student.index'));
+        return redirect(route('dashboard'));
     }
 
     /**
@@ -166,62 +99,4 @@ class StudentController extends Controller
     {
         //
     }
-
-    public function insertByExcel()
-    {
-        return view('student.insert-by-excel');
-    }
-
-    public function StudentSample()
-    {
-        return Excel::download(new StudentExport(true), now() . " sample.xlsx");
-    }
-
-    public function StudentPreview(Request $request)
-    {
-        //Lay du lieu trong file excel -> show thong tin 
-        $student = Excel::toArray(new StudentImport, $request->file('excel'));
-
-        //  return redirect()->back()->with('message', 'File không đúng định dạng!');
-        //Kiem tra file co dung dinh dang hay khong
-        try {
-            $students = $student[0][0];
-            $name = $students['ho_ten'];
-            $email = $students["email"];
-            $password = $students["password"];
-            $gender = $students["gioi_tinh"] == "Nam" ? 0 : 1;
-            $dob = $students["ngay_sinh"];
-            $lop = $students["lop"];
-        } catch (Exception $e) {
-            return redirect()->back()->with('message', 'File không đúng định dạng hoặc không có dữ liệu!');
-        }
-        //put vao session
-        session(['tmp_student' => $student[0]]);
-
-        return view('student.preview', [
-            'student' => $student[0],
-        ]);
-    }
-
-    public function confirmSave()
-    {
-        $student = session('tmp_student');
-        if ($student != null && count($student) > 0) {
-            //Nhập vào database
-            foreach ($student as $student) {
-                $date = str_replace("/", "-", $student["ngay_sinh"]);
-                StudentModel::create([
-                    "name" => $student["ho_ten"],
-                    "email" => $student["email"],
-                    "password" => $student["password"],
-                    "gender" => $student["gioi_tinh"] == "Nam" ? 0 : 1,
-                    "dob" => date("Y-m-d", strtotime($date)),
-                    "idClass" => ClassModels::where("nameClass", $student["lop"])->value("idClass"),
-                ]);
-            }
-        }
-        return view('student.insert-by-excel');
-    }
-
-    
 }

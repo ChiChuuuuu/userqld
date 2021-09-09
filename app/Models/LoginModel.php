@@ -9,6 +9,7 @@ class LoginModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'admin';
+    protected $table = 'student';
+    protected $primaryKey = 'idStudent';
     public $timestamps = false;
 }

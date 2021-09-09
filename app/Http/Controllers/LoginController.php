@@ -20,9 +20,13 @@ class LoginController extends Controller
         try {
             $email = $request->get('email');
             $password = $request->get('password');
-            $admin = LoginModel::where('email', $email)->where('password', $password)
+            $student = LoginModel::where('email', $email)->where('password', $password)
                 ->firstOrFail();
-            $request->session()->put('id', $admin->id);
+            $request->session()->put('id', $student->idStudent);
+            $request->session()->put('name', $student->name);
+            $request->session()->put('dob', $student->dob);
+            $request->session()->put('gender', $student->gender);
+            $request->session()->put('email', $student->email);
             return Redirect::route('dashboard');
         } catch (Exception $e) {
             return redirect()->route('login')->with('error', 'Sai ten tai khoan hoac mat khau');

@@ -29,22 +29,6 @@
                         </tr>
                         <tr>
                             <td>
-                                Email
-                            </td>
-                            <td>
-                                <input type="email" value="{{ $student->email }}" name="email" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Mật khẩu
-                            </td>
-                            <td>
-                                <input type="text" value="{{ $student->password }}" name="password" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
                                 Giới tính
                             </td>
                             <td>
@@ -60,20 +44,6 @@
                             </td>
                             <td>
                                 <input type="date" value="{{ $student->dob }}" name="date">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Lớp
-                            </td>
-                            <td>
-                                <select name="idClass">
-                                    @foreach ($listClass as $class)
-                                        <option value="{{ $class->idClass }}" @if ($class->idClass == $student->idClass) <?php echo 'selected'; ?> @endif>
-                                            {{ $class->nameClass }}
-                                        </option>
-                                    @endforeach
-                                </select>
                             </td>
                         </tr>
                     </table>

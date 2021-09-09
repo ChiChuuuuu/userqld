@@ -54,6 +54,7 @@ Route::middleware([CheckLogin::class])->group(function () {
     Route::prefix('grade')->name('grade.')->group(function () {
         Route::get('/insert-by-excel', [GradeController::class, 'insertByExcel'])->name('insert-by-excel');
     });
+
     Route::get('/grade-sample', [GradeController::class, 'GradeSample']);
 
     Route::post('/grade-preview', [GradeController::class, 'GradePreview']);
@@ -63,13 +64,13 @@ Route::middleware([CheckLogin::class])->group(function () {
     Route::prefix('grade2')->name('grade2.')->group(function () {
         Route::get('/insert-by-excel', [Grade2Controller::class, 'insertByExcel'])->name('insert-by-excel');
     });
-    Route::get('/grade2-sample', [Grade2Controller::class, 'GradeSample']);
+    // Route::get('/grade2-sample', [Grade2Controller::class, 'GradeSample']);
 
-    Route::post('/grade2-preview', [Grade2Controller::class, 'GradePreview']);
+    // Route::post('/grade2-preview', [Grade2Controller::class, 'GradePreview']);
 
-    Route::post('/grade2-confirm', [Grade2Controller::class, 'confirmSave']);
+    // Route::post('/grade2-confirm', [Grade2Controller::class, 'confirmSave']);
 
-    Route::get('/export-by-id-student/{id}', [Grade2Controller::class, 'exportByIdStudent'])->name('export-by-id-student');
+    // Route::get('/export-by-id-student/{id}', [Grade2Controller::class, 'exportByIdStudent'])->name('export-by-id-student');
 
     //CRUD Class
     Route::resource('class', ClassroomController::class);
@@ -88,21 +89,21 @@ Route::middleware([CheckLogin::class])->group(function () {
 
     Route::resource('editgrade', EditGradeController::class);
 
-    Route::prefix('grade')->name('grade.')->group(function () {
-        Route::get('/', [GradeController::class, 'index'])->name('index');
-        Route::get('/get-students/{id}', [GradeController::class, 'getStudentsByIDClass'])->name('get-students');
-        Route::get('/get-subject/{id}', [GradeController::class, 'getSubjectByIdClass'])->name('get-subject');
-    });
+    // Route::prefix('grade')->name('grade.')->group(function () {
+    //     Route::get('/', [GradeController::class, 'index'])->name('index');
+    //     Route::get('/get-students/{id}', [GradeController::class, 'getStudentsByIDClass'])->name('get-students');
+    //     Route::get('/get-subject/{id}', [GradeController::class, 'getSubjectByIdClass'])->name('get-subject');
+    // });
 
-    Route::prefix('grade2')->name('grade2.')->group(function () {
-        Route::get('/', [Grade2Controller::class, 'index'])->name('index');
-        Route::get('/get-students/{id}', [Grade2Controller::class, 'getStudentsByIDClass'])->name('get-students');
-        Route::get('/get-subject/{id}', [Grade2Controller::class, 'getSubjectByIdClass'])->name('get-subject');
-    });
+    // Route::prefix('grade2')->name('grade2.')->group(function () {
+    //     Route::get('/', [Grade2Controller::class, 'index'])->name('index');
+    //     Route::get('/get-students/{id}', [Grade2Controller::class, 'getStudentsByIDClass'])->name('get-students');
+    //     Route::get('/get-subject/{id}', [Grade2Controller::class, 'getSubjectByIdClass'])->name('get-subject');
+    // });
 
-    Route::prefix('editgrade')->name('editgrade.')->group(function () {
-        Route::get('/', [EditGradeController::class, 'index'])->name('index');
-        Route::get('/get-students/{id}', [EditGradeController::class, 'getStudentsByIDClass'])->name('get-students');
-        Route::get('/get-subject/{id}', [EditGradeController::class, 'getSubjectByIdClass'])->name('get-subject');
-    });
+    // Route::prefix('editgrade')->name('editgrade.')->group(function () {
+    //     Route::get('/', [EditGradeController::class, 'index'])->name('index');
+    //     Route::get('/get-students/{id}', [EditGradeController::class, 'getStudentsByIDClass'])->name('get-students');
+    //     Route::get('/get-subject/{id}', [EditGradeController::class, 'getSubjectByIdClass'])->name('get-subject');
+    // });
 });
